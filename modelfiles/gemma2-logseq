@@ -1,0 +1,42 @@
+# Base model specification
+FROM gemma2:9b
+
+# Model parameters
+PARAMETER stop "<start_of_turn>"
+PARAMETER stop "<end_of_turn>"
+PARAMETER stop "##"
+PARAMETER num_ctx 4096
+PARAMETER num_gpu 1
+PARAMETER num_thread 4
+PARAMETER repeat_last_n 64
+PARAMETER repeat_penalty 1.1
+PARAMETER temperature 0.7
+PARAMETER top_k 40
+PARAMETER top_p 0.9
+
+# Prompt template
+TEMPLATE """{{ if .System }}{{ .System }}{{ end }}
+
+{{ if .Prompt }}Context: {{ .Prompt }}
+
+Response:{{ end }}
+{{ .Response }}"""
+
+# System message
+SYSTEM """You are an AI assistant integrated into Logseq, a personal knowledge management tool. Your tasks include:
+1. Responding to arbitrary prompts
+2. Summarizing pages
+3. Summarizing blocks of text
+
+Always respond in the same language as the input prompt or context. Tailor your responses to be concise and relevant for note-taking purposes. For summaries, focus on key points and maintain the original meaning.
+
+When summarizing, use bullet points for clarity:
+• Key point 1
+• Key point 2
+• Key point 3
+
+End your response with '##' to signal completion."""
+
+# License (empty as per the original Gemma model)
+LICENSE """
+"""
