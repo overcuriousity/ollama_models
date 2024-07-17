@@ -34,7 +34,6 @@ PARAMETER top_k 50
 PARAMETER top_p 0.95
 PARAMETER repeat_last_n 64
 PARAMETER repeat_penalty 1.1
-PARAMETER max_tokens 2048
-PARAMETER num_ctx 2048
+PARAMETER num_ctx 8192
 
 LICENSE """Microsoft."""
